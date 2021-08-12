@@ -1,0 +1,36 @@
+.debug-window {
+  cursor: grab;
+  position: fixed;
+  min-width: 200px;
+  min-height: 300px;
+  background-color: whitesmoke;
+  overflow: auto;
+  z-index: 9999;
+  border-radius: 5px;
+  border: 2px solid #3a3a3a;
+}
+
+.debug-window .header {
+  border-bottom: 1px solid #3a3a3a;
+  background-color: #3a3a3a;
+  color: #d3ff00;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.debug-window .header button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+} 
+
+.debug-window pre {
+  padding: 0;
+  margin: 0;
+  border: none;
+}

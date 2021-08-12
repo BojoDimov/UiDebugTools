@@ -19,7 +19,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ui-debug-tools-lib": [
+        "dist/ui-debug-tools-lib/ui-debug-tools-lib",
+        "dist/ui-debug-tools-lib"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

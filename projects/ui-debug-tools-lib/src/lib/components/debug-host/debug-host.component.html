@@ -1,0 +1,13 @@
+<ng-container *ngFor="let window of debugWindows">
+  <bd-udt-debug-window *ngIf="window.open" [title]="window.title" [data]="window.data$ | async" (onClose)="window.open = false"></bd-udt-debug-window>
+</ng-container>
+
+<div class="debug-host">
+  <div class="header">
+    <div>Debug Host</div>
+    <button (click)="collapsed = !collapsed">{{ collapsed ? '&#x25B2;' : '&#x25BC;'}}</button>
+  </div>
+  <ng-container *ngIf="!collapsed">
+    <div class="debug-window-title" *ngFor="let window of debugWindows" (click)="window.open = true">{{window.title}}</div>
+  </ng-container>
+</div>

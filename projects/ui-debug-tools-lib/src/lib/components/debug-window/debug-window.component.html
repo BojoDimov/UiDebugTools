@@ -1,0 +1,8 @@
+<div class="debug-window" [style.top]="top + 'px'" [style.left]="left + 'px'" (mousedown)="dragStart($event)"
+     (mousemove)="drag($event)" (mouseup)="dragEnd($event)">
+  <div class="header">
+    <div>{{title}}</div>
+    <button (click)="close()">&#10006;</button>
+  </div>
+  <pre>{{data | json}}</pre>
+</div>

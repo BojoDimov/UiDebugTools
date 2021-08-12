@@ -122,6 +122,46 @@
           }
         }
       }
+    },
+    "ui-debug-tools-lib": {
+      "projectType": "library",
+      "root": "projects/ui-debug-tools-lib",
+      "sourceRoot": "projects/ui-debug-tools-lib/src",
+      "prefix": "bd-udt",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/ui-debug-tools-lib/tsconfig.lib.json",
+            "project": "projects/ui-debug-tools-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-debug-tools-lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ui-debug-tools-lib/src/test.ts",
+            "tsConfig": "projects/ui-debug-tools-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/ui-debug-tools-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ui-debug-tools-lib/tsconfig.lib.json",
+              "projects/ui-debug-tools-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ui-debug-tools"
