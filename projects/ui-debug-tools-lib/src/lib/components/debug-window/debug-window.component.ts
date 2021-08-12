@@ -10,6 +10,7 @@ export class DebugWindowComponent {
   @Input() data: any = undefined;
 
   @Output() onClose = new EventEmitter<boolean>();
+  @Output() onSelect = new EventEmitter<boolean>();
 
   top = 200;
   left = 200;
@@ -17,17 +18,12 @@ export class DebugWindowComponent {
   private isDragging = false;
   private previousPosition?: MouseEvent;
 
-  ngOnInit(): void {
-    document.body.addEventListener('mousedown', ev => {
-      console.log('Caught mouse down event over document body');
-    });
-  }
-
   dragStart(event: MouseEvent) {
     event.stopPropagation();
 
     this.isDragging = true;
     this.previousPosition = event;
+    this.onSelect.emit(true);
   }
 
   drag(event: MouseEvent) {
@@ -49,7 +45,7 @@ export class DebugWindowComponent {
     this.previousPosition = undefined;
   }
 
-  close(){
+  close() {
     this.onClose.emit(true);
   }
 }

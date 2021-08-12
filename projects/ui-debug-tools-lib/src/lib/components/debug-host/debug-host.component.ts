@@ -41,6 +41,12 @@ export class DebugHostComponent implements OnDestroy {
     });
   }
 
+  setOnTop(index: number) {
+    let window = this.debugWindows[index];
+    this.debugWindows.splice(index, 1);
+    this.debugWindows.push(window);
+  }
+
   ngOnDestroy() {
     this.destroy$.next(true);
     this.debugWindows.forEach(window => window.data$.complete())
