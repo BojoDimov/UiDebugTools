@@ -1,25 +1,36 @@
 import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-
 @Directive({
   selector: '[udtFloatingWindow]'
 })
 export class FloatingWindowDirective {
 
+  /**
+   * style.top | Format is limited to \<value>px
+   */
   @Input()
   @HostBinding('style.top')
   top?: string;
 
+  /**
+   * style.right | Format is limited to \<value>px
+   */
   @Input()
-  @HostBinding('style.left')
-  left?: string;
+  @HostBinding('style.right')
+  right?: string;
 
+  /**
+   * style.bottom | Format is limited to \<value>px
+   */
   @Input()
   @HostBinding('style.bottom')
   bottom?: string;
 
+  /**
+   * style.left | Format is limited to \<value>px
+   */
   @Input()
-  @HostBinding('style.right')
-  right?: string;
+  @HostBinding('style.left')
+  left?: string;
 
   private isDragging = false;
   private previousPosition?: MouseEvent;
