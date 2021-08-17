@@ -127,7 +127,7 @@
       "projectType": "library",
       "root": "projects/ui-debug-tools-lib",
       "sourceRoot": "projects/ui-debug-tools-lib/src",
-      "prefix": "bd-udt",
+      "prefix": "udt",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

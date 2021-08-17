@@ -1,8 +1,8 @@
 .debug-window {
   cursor: grab;
   position: fixed;
-  min-width: 200px;
-  min-height: 300px;
+  min-width: 400px;
+  min-height: 600px;
   background-color: whitesmoke;
   overflow: auto;
   z-index: 9999;

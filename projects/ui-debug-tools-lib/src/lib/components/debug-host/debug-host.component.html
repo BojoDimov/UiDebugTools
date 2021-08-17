@@ -1,9 +1,14 @@
 <ng-container *ngFor="let window of debugWindows; let i = index">
-  <bd-udt-debug-window *ngIf="window.open" [title]="window.title" [data]="window.data$ | async"
-                       (onClose)="window.open = false" (onSelect)="setOnTop(i)"></bd-udt-debug-window>
+  <udt-debug-window *ngIf="window.open" [title]="window.title" [data]="window.data$ | async"
+                       (onClose)="window.open = false" (onSelect)="setOnTop(i)"></udt-debug-window>
 </ng-container>
 
-<div class="debug-host">
+<div *ngIf="showBanner" class="debug-host-banner">
+  UI Debug Tools are Enabled
+  <button class="debug-host-banner-close" (click)="showBanner=false">&#10006;</button>
+</div>
+
+<div class="debug-host" udtFloatingWindow bottom="0px" left="0px">
   <div class="header">
     <div>Debug Host</div>
     <button (click)="collapsed = !collapsed">{{ collapsed ? '&#x25B2;' : '&#x25BC;'}}</button>

@@ -12,7 +12,7 @@ interface DebugWindow {
 }
 
 @Component({
-  selector: 'bd-udt-debug-host',
+  selector: 'udt-debug-host',
   templateUrl: './debug-host.component.html',
   styleUrls: ['./debug-host.component.css']
 })
@@ -20,6 +20,7 @@ export class DebugHostComponent implements OnDestroy {
   debugWindows: DebugWindow[] = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
   collapsed = false;
+  showBanner = true;
 
   constructor(
     debugEvents: DebugEventsService

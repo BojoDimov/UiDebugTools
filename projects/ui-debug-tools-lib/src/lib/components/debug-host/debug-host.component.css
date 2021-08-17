@@ -1,10 +1,31 @@
+.debug-host-banner {
+  position: fixed;
+  top:0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+  background-color: yellow;
+  color: red;
+  font-weight: bold;
+  z-index: 9999;
+  padding: 8px;
+}
+
+.debug-host-banner-close {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
+
 .debug-host {
   position: fixed;
   background-color: whitesmoke;
   border-radius: 5px;
   border: 2px solid #3a3a3a;
-  bottom: 0;
-  left: 0;
   width: 600px;
   z-index: 9999;
 }
