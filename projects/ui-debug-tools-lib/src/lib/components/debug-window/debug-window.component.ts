@@ -1,24 +1,23 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import * as DebugEvents from '../../debug-events';
+import { DebugWindow } from '../debug-host/debug-host.component';
 @Component({
   selector: 'udt-debug-window',
   templateUrl: './debug-window.component.html',
   styleUrls: ['./debug-window.component.css']
 })
 export class DebugWindowComponent {
-  @Input() title: string = '';
-  @Input() data: any = undefined;
+  @Input()
+  set debugWindow(debugWindow: DebugWindow) {
+    this.id = debugWindow.id;
+    this.data$ = DebugEvents.observe(this.id);
+    this.window = debugWindow;
+  }
 
-  @Output() onClose = new EventEmitter<boolean>();
   @Output() onSelect = new EventEmitter<boolean>();
 
-  top = 200;
-  left = 200;
-
-  private isDragging = false;
-  private previousPosition?: MouseEvent;
-
-  close() {
-    this.onClose.emit(true);
-  }
+  id?: string;
+  data$?: Observable<any>;
+  window?: DebugWindow;
 }

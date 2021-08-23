@@ -1,20 +1,28 @@
 <ng-container *ngFor="let window of debugWindows; let i = index">
-  <udt-debug-window *ngIf="window.open" [title]="window.title" [data]="window.data$ | async"
-                       (onClose)="window.open = false" (onSelect)="setOnTop(i)"></udt-debug-window>
+  <udt-debug-window *ngIf="window.open"
+                    [debugWindow]="window"
+                    (onSelect)="setOnTop(i)"></udt-debug-window>
 </ng-container>
 
-<div *ngIf="showBanner" class="debug-host-banner">
+<div *ngIf="showBanner"
+     class="debug-host-banner">
   UI Debug Tools are Enabled
-  <button class="debug-host-banner-close" (click)="showBanner=false">&#10006;</button>
+  <button class="debug-host-banner-close"
+          (click)="showBanner=false">&#10006;</button>
 </div>
 
-<div class="debug-host" udtFloatingWindow bottom="0px" left="0px">
+<div class="debug-host"
+     udtFloatingWindow
+     bottom="0px"
+     left="0px">
   <div class="header">
     <div>Debug Host</div>
     <button (click)="collapsed = !collapsed">{{ collapsed ? '&#x25B2;' : '&#x25BC;'}}</button>
   </div>
   <ng-container *ngIf="!collapsed">
-    <div class="debug-window-title" *ngFor="let window of debugWindows" (click)="window.open = true">{{window.title}}
+    <div class="debug-window-title"
+         *ngFor="let window of debugWindows"
+         (click)="window.open = true">{{window.id}}
     </div>
   </ng-container>
 </div>

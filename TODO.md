@@ -7,10 +7,13 @@
 5. Add @Watch, @Debug decorators
 6. Angular schematics for add, remove
 7. Magnetic and attachable/detachable windows
-8. Window position coming from outside
 9. Windows remember their position
+10. When showing window set it at top
+
 
 # DONE
 1. Make Debug Host dragable
 2. Extract move window logic to directive `udtFloatingWindow`
 3. Add 'This application was deployed with Debug tools enabled' banner
+4. Window position coming from outside
+5. Extract DebugEventsService to singleton module. This is needed in order for @Watch and @Debug decorators to work

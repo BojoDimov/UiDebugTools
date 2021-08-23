@@ -1,14 +1,40 @@
 import { Component, OnDestroy } from '@angular/core';
-import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { DebugEventsService } from '../../services/debug-events.service';
+import { Subject } from 'rxjs';
+import * as DebugEvents from '../../debug-events';
 
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 
-interface DebugWindow {
+export class DebugWindow {
   id: string;
-  title: string;
-  data$: Subject<any>;
-  open: boolean
+  open: boolean;
+
+  rect: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  }
+
+  private readonly DEFAULT_WIDTH = 2 * 647.2135955;
+  private readonly DEFAULT_HEIGHT = 2 * 400;
+
+  constructor(id: string) {
+    this.id = id;
+    this.open = true;
+
+    const windowBoundingRect = document.body.getBoundingClientRect();
+
+    // Window is at least quadruple as small as the whole viewport
+    let width = Math.min(windowBoundingRect.width, this.DEFAULT_WIDTH) / 2;
+    let height = Math.min(windowBoundingRect.height, this.DEFAULT_HEIGHT) / 2;
+
+    this.rect = {
+      x: windowBoundingRect.x + windowBoundingRect.width / 2 - width / 2,
+      y: windowBoundingRect.y + windowBoundingRect.height / 2 - height / 2,
+      width: width,
+      height: height
+    }
+  }
 }
 
 @Component({
@@ -22,24 +48,14 @@ export class DebugHostComponent implements OnDestroy {
   collapsed = false;
   showBanner = true;
 
-  constructor(
-    debugEvents: DebugEventsService
-  ) {
-    debugEvents.data$.pipe(takeUntil(this.destroy$)).subscribe(event => {
-      let window = this.debugWindows.find(window => window.id === event.channelId);
-
-      if (!window) {
-        window = {
-          id: event.channelId,
-          title: event.channelId,
-          data$: new ReplaySubject<any>(1),
-          open: true
-        };
-        this.debugWindows.push(window);
-      }
-
-      window.data$.next(event.data);
-    });
+  constructor() {
+    DebugEvents.observe()
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((event: DebugEvents.DebugEvent) => !this.debugWindows.some(window => window.id === event.channelId))
+      ).subscribe(event => {
+        this.debugWindows.push(new DebugWindow(event.channelId));
+      });
   }
 
   setOnTop(index: number) {
@@ -50,6 +66,5 @@ export class DebugHostComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.destroy$.next(true);
-    this.debugWindows.forEach(window => window.data$.complete())
   }
 }

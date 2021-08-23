@@ -1,7 +1,14 @@
-<div class="debug-window" udtFloatingWindow top="200px" left="300px" (onSelect)="onSelect.emit($event)">
+<div *ngIf="window"
+     class="debug-window"
+     udtFloatingWindow
+     [top]="window.rect.y + 'px'"
+     [left]="window.rect.x + 'px'"
+     [style.width]="window.rect.width + 'px'"
+     [style.height]="window.rect.height + 'px'"
+     (onSelect)="onSelect.emit($event)">
   <div class="header">
-    <div>{{title}}</div>
-    <button (click)="close()">&#10006;</button>
+    <div>{{id}}</div>
+    <button (click)="window.open = false">&#10006;</button>
   </div>
-  <pre>{{data | json}}</pre>
+  <pre>{{data$ | async | json}}</pre>
 </div>
